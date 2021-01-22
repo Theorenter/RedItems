@@ -1,0 +1,5 @@
+plugin:
+  debug: true
+
+recipes:
+  removed:

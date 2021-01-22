@@ -1,0 +1,27 @@
+{
+  "reditems-id" : "custom_pickaxe",
+  "material" : "WOODEN_PICKAXE",
+  "meta" : {
+    "display-name": "<#FF4D00>Тестовая кирка",
+    "persistent-data" : [{
+      "data-key" : "UNQ-DURABILITY",
+      "data-type" : "INTEGER_ARRAY",
+      "data-value" : [173, 173]
+    }]
+  },
+  "recipes" : [{
+    "shaped-recipe" : {
+      "recipe-key" : "_shaped",
+      "ingredients" : {
+        "1" : "STICK",
+        "2" : "DIAMOND_BLOCK"
+      },
+      "shape": [
+        "222",
+        " 1 ",
+        " 1 "
+      ],
+      "amount": 1
+    }
+  }]
+}

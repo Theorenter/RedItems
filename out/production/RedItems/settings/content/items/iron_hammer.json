@@ -1,0 +1,39 @@
+{
+  "reditems-id" : "iron_hammer",
+  "material" : "WOODEN_SWORD",
+  "meta" : {
+    "display-name": "<#E7A81B>Железный молот",
+    "lore" : [
+      "<#CFCFCF>Используется дла <#E7A81B>крафта",
+      "<#CFCFCF>новых улучшенных предметов."
+    ],
+    "custom-model-data" : 102,
+    "attributes": [{
+      "attribute-modifier" : "GENERIC-ATTACK-DAMAGE",
+      "attribute-amount" : 4,
+      "attribute-operation" : "ADD-NUMBER",
+      "equipment-slot" : "HAND"
+    },
+    {
+      "attribute-modifier" : "GENERIC-ATTACK-SPEED",
+      "attribute-amount" : 1,
+      "attribute-operation" : "ADD-NUMBER",
+      "equipment-slot" : "HAND"
+    }]
+  },
+  "recipes" : [{
+    "shaped-recipe" : {
+      "recipe-key" : "_shaped",
+      "ingredients" : {
+        "1" : "STICK",
+        "2" : "IRON_INGOT"
+      },
+      "shape": [
+        "22 ",
+        "211",
+        "22 "
+      ],
+      "amount": 1
+    }
+  }]
+}

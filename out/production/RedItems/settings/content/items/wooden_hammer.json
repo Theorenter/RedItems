@@ -1,0 +1,39 @@
+{
+  "reditems-id" : "wooden_hammer",
+  "material" : "WOODEN_SWORD",
+  "meta" : {
+    "display-name": "<#FFFFFF><magic>Деревянный молот",
+    "lore" : [
+      "<#FFA852>Инструмент, <magic>позволяющий вам",
+      "<#FF3F14>создавать <strike>более сложные",
+      "<#B00000>материалы для улучшенных инструментов"
+    ],
+    "enchantments" : [{
+      "enchantment": "DAMAGE-ALL",
+      "level" : 25,
+      "ignore-level-restriction" : false
+    },
+    {
+      "enchantment": "ARROW-DAMAGE",
+      "level": 15,
+      "ignore-level-restriction": false
+     }],
+    "custom-model-data" : 101
+  },
+  "recipes" : [{
+    "shaped-recipe" : {
+      "recipe-key" : "_shaped",
+      "craft-group" : "town_flags",
+      "ingredients" : {
+        "1" : "STICK",
+        "2" : "OAK_PLANKS"
+      },
+      "shape": [
+        " 22",
+        "112",
+        " 22"
+      ],
+      "amount": 1
+    }
+  }]
+}

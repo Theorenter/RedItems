@@ -1,0 +1,13 @@
+name: RedItems
+version: 0.1.0
+main: org.concordiacraft.reditems.main.RedItems
+api-version: 1.13
+authors:
+  - Theorenter
+loadbefore:
+  - RedRealms
+commands:
+  itemlist:
+    description: 'Show a list of custom items.'
+    usage: /<command>
+    aliases: [customitems, reditemslist]

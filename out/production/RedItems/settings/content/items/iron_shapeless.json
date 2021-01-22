@@ -1,0 +1,16 @@
+{
+  "reditems-id" : "iron_shapeless",
+  "material" : "IRON_INGOT",
+  "meta" : {
+    "display-name": "<#FFFFFF>Бесформенное железо",
+    "custom-model-data" : 101
+  },
+  "recipes" : [{
+    "furnace-recipe" : {
+      "recipe-key" : "_furnace",
+      "source-material" : "IRON_ORE",
+      "experience" : 15.257,
+      "cooking-time" : 40
+    }
+  }]
+}

@@ -1,0 +1,47 @@
+{
+  "reditems-id" : "iron_spear",
+  "material" : "TRIDENT",
+  "meta" : {
+    "display-name": "<#FFFFFF>Железное копье",
+    "lore" : [
+      "<#FFFFFF>Имеет среднюю скорость атаки",
+      "",
+      "<#FF0000>⚔ <#FFFFFF>Средний урон: <#FF0000>5",
+      "",
+      "<#808080>❒ <#EFA04A>С шансом в 25%",
+      "<#808080>❒ <#EFA04A>может пробить щит"
+    ],
+    "custom-model-data" : 101,
+    "attributes": [{
+      "attribute-modifier" : "GENERIC-ATTACK-DAMAGE",
+      "attribute-amount" : 5,
+      "attribute-operation" : "ADD-NUMBER",
+      "equipment-slot" : "HAND"
+    }],
+    "persistent-data" : [{
+      "data-key" : "UNQ-SHIELD-BREAKER",
+      "data-type" : "INTEGER_ARRAY",
+      "data-value" : [120, 25]
+    },
+    {
+      "data-key" : "UNQ-RIDING-MODIFIER",
+      "data-type" : "DOUBLE",
+      "data-value" : 1.25
+    }]
+  },
+  "recipes" : [{
+    "shaped-recipe" : {
+      "recipe-key" : "_shaped",
+      "ingredients" : {
+        "1" : "STICK",
+        "2" : "IRON_INGOT"
+      },
+      "shape": [
+        "2  ",
+        " 1 ",
+        "  1"
+      ],
+      "amount": 1
+    }
+  }]
+}

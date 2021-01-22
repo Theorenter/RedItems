@@ -1,0 +1,43 @@
+{
+  "reditems-id" : "green_town_banner",
+  "material" : "GREEN_BANNER",
+  "meta" : {
+    "display-name": "<#E7A81B>Зелёный флаг города",
+    "lore" : [
+      "<#CFCFCF>Используется дла <#2A92D1>создания",
+      "<#2A92D1>нового города.",
+      "",
+      "<#CFCFCF>Чанк, на котором будет расположен",
+      "<#CFCFCF>Данный флаг перейдет во владения",
+      "<#CFCFCF>Вашего новосозданного города.",
+      "<#CFCFCF>После размещения флага у вас будет",
+      "<#CFCFCF>право выбрать название своему городу.",
+      "",
+      "<#CFCFCF>Данный флаг станет в дальнейшем",
+      "<#CFCFCF>знаменем вашего города, так что",
+      "<#CFCFCF>можете его отредактировать!"
+    ],
+    "persistent-data" : [{
+      "data-key" : "UNQ-NEW-TOWN",
+      "data-type" : "BYTE",
+      "data-value" : 1
+    }]
+  },
+  "recipes" : [{
+    "shaped-recipe" : {
+      "recipe-key" : "_shaped",
+      "craft-group" : "town_flags",
+      "ingredients" : {
+        "1" : "STICK",
+        "2" : "GREEN_WOOL",
+        "3" : "LEATHER"
+      },
+      "shape": [
+        "333",
+        "222",
+        " 1 "
+      ],
+      "amount": 1
+    }
+  }]
+}
