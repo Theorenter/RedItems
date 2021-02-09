@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="RedUtils">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../ConcordiaCraft/plugins/RedUtils.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

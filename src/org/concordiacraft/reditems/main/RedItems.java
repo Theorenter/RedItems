@@ -4,19 +4,19 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.concordiacraft.reditems.config.ConfigDefault;
-import org.concordiacraft.reditems.items.CustomItem;
 import org.concordiacraft.reditems.items.ItemManager;
 import org.concordiacraft.reditems.listeners.CustomItemDurability;
+import org.concordiacraft.reditems.listeners.CustomRecipesDiscovering;
 import org.concordiacraft.redutils.main.utils.RedLog;
 import org.concordiacraft.redutils.main.RedPlugin;
 
-import java.util.HashMap;
-
+/**
+ * @author Theorenter
+ * Main class.
+ */
 public class RedItems extends JavaPlugin implements RedPlugin {
 
     // Fields
-    public static HashMap<String, CustomItem> customItemList = new HashMap<>();
-
     private static Boolean isDebug;
     private static RedLog rLog;
     private ConfigDefault config;
@@ -39,8 +39,9 @@ public class RedItems extends JavaPlugin implements RedPlugin {
         ItemManager.itemLoadFromResources(this);
         ItemManager.itemLoad(this);
 
-        // Events
+        // Listeners
         Bukkit.getPluginManager().registerEvents(new CustomItemDurability(this), this);
+        Bukkit.getPluginManager().registerEvents(new CustomRecipesDiscovering(this), this);
     }
 
     @Override

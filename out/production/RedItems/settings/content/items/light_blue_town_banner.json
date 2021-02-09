@@ -28,9 +28,9 @@
       "recipe-key" : "_shaped",
       "craft-group" : "town_flags",
       "ingredients" : {
-        "1" : "STICK",
-        "2" : "LIGHT_BLUE_WOOL",
-        "3" : "LEATHER"
+        "1" : {"material" : "STICK", "custom-item-id" : null},
+        "2" : {"material" : "LIGHT_BLUE_WOOL", "custom-item-id" : null},
+        "3" : {"material" : "LEATHER", "custom-item-id" : null}
       },
       "shape": [
         "333",

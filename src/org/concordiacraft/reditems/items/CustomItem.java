@@ -7,15 +7,13 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.concordiacraft.reditems.main.RedItems;
-import org.concordiacraft.reditems.recipes.minecraft.RedFurnaceRecipe;
-import org.concordiacraft.reditems.recipes.minecraft.RedShapedRecipe;
+import org.concordiacraft.reditems.recipes.RedShapedRecipe;
+import org.concordiacraft.reditems.recipes.RedFurnaceRecipe;
 import org.concordiacraft.redutils.main.utils.RedFormatter;
-import org.concordiacraft.redutils.main.utils.RedLog;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -23,10 +21,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author Theorenter
@@ -39,24 +34,32 @@ public class CustomItem {
     private String ID;
     private ItemStack itemStack;
     private ItemMeta customItemMeta;
-
+    private HashMap<String, ItemStack[]> customMatrixRecipes = new HashMap<>();
     /**
      * Constructor of a new custom item.
      * @param plugin a plugin to which custom items will be assigned.
      * @param file JSON file from which the custom item is formed.
      */
-    CustomItem(RedItems plugin, File file) {
+    public CustomItem(RedItems plugin, File file) { itemCreation(plugin, file); }
+    public CustomItem(RedItems plugin, String ID) {
+        File customItemFile = new File(plugin.getDataFolder() + File.separator + "settings" +
+                File.separator + "content" + File.separator + "items" + File.separator + ID + ".json");
+        itemCreation(plugin, customItemFile); }
+
+    // Main part
+    private void itemCreation(RedItems plugin, File file) {
         try {
             // JSON
             JSONParser jsonParser = new JSONParser();
             Object parsed = jsonParser.parse(new BufferedReader(new InputStreamReader(new FileInputStream(file.getPath()), StandardCharsets.UTF_8)));
-            JSONObject jsonObject = (JSONObject) parsed;
+            JSONObject customItemJSON = (JSONObject) parsed;
 
             // Required values
-            this.ID = (String) jsonObject.get("reditems-id");
-            itemStack = new ItemStack(Material.valueOf((String) jsonObject.get("material")));
+            this.ID = (String) customItemJSON.get("reditems-id");
+            itemStack = new ItemStack(Material.valueOf((String) customItemJSON.get("material")));
+
             // Meta
-            JSONObject metaObject = (JSONObject) jsonObject.get("meta");
+            JSONObject metaObject = (JSONObject) customItemJSON.get("meta");
             if (metaObject != null) {
                 this.customItemMeta = this.itemStack.getItemMeta();
 
@@ -112,22 +115,25 @@ public class CustomItem {
             PersistentDataContainer dataContainer = this.customItemMeta.getPersistentDataContainer();
             dataContainer.set(new NamespacedKey(plugin, "REDITEMS-ID"), PersistentDataType.STRING, this.ID);
 
-            // Add item to CustomItems list
             itemStack.setItemMeta(customItemMeta);
-            RedItems.customItemList.put(this.ID, this);
 
             // Recipes
-            if (jsonObject.containsKey("recipes")) {
-                JSONArray recipesList = (JSONArray) jsonObject.get("recipes");
+            if (customItemJSON.containsKey("recipes")) {
+                JSONArray recipesList = (JSONArray) customItemJSON.get("recipes");
                 for (Object objRecipe : recipesList) {
                     JSONObject recipe = (JSONObject) objRecipe;
-                    if (recipe.containsKey("shaped-recipe")) { RedShapedRecipe.newShapedRecipe(recipe, this.itemStack, this.ID);break; }
-                    if (recipe.containsKey("furnace-recipe")) { RedFurnaceRecipe.newFurnaceRecipe(recipe, this.itemStack, this.ID);break; }
+                    if (recipe.containsKey("shaped-recipe")) { RedShapedRecipe.newRedShapedRecipe(recipe, this); break; }
+                    if (recipe.containsKey("furnace-recipe")) { RedFurnaceRecipe.newFurnaceRecipe(recipe, this); break; }
                 }
             }
+
+            // Add item to CustomItems list & set final meta
+            ItemManager.getCustomItemList().put(this.ID, this);
+            ItemManager.getCustomItemStackList().add(this.itemStack);
+
             plugin.getRedLogger().debug("Custom item \"" + this.ID + "\" was successfully loaded with all the relevant recipes!");
         } catch (IOException | ParseException e) {
-            plugin.getRedLogger().error("Cannot create a custom item from the " + file + " file", e);
+            plugin.getRedLogger().error("Cannot create a custom item from the " + file.getName() + " file", e);
         }
     }
 
@@ -136,7 +142,7 @@ public class CustomItem {
         String enchantmentString = (String) enchantment.get("enchantment");
         Long level = (Long) enchantment.get("level");
         Boolean ignoreLevelRestriction = (Boolean) enchantment.get("ignore-level-restriction");
-        Enchantment enchant = null;
+        Enchantment enchant;
         switch (enchantmentString) {
             case "ARROW-DAMAGE": { enchant = Enchantment.ARROW_DAMAGE; break; }
             case "ARROW-FIRE": { enchant = Enchantment.ARROW_FIRE; break; }
@@ -359,4 +365,16 @@ public class CustomItem {
      * @return custom ItemStack.
      */
     public ItemStack getItemStack() { return this.itemStack; }
+
+    /**
+     * Adds a custom shaped recipe using ItemStacks to a craft this custom item.
+     * @param key the named key of the recipe.
+     * @param recipeMatrix ItemStack array for creating an item.
+     */
+    public void addShapedMatrixRecipe(String key, ItemStack[] recipeMatrix) { this.customMatrixRecipes.put(key, recipeMatrix); }
+
+    public HashMap<String, ItemStack[]> getCustomMatrixRecipe() {
+        return this.customMatrixRecipes;
+    }
+
 }

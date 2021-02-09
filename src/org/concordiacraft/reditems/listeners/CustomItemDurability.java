@@ -25,7 +25,7 @@ public class CustomItemDurability implements Listener {
     public CustomItemDurability(RedItems plugin) { this.plugin = plugin; }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void PlayerCustomDamage(PlayerItemDamageEvent e) {
+    public void onCustomItemDamage(PlayerItemDamageEvent e) {
         ItemStack i = e.getItem();
         ItemMeta im = i.getItemMeta();
         PersistentDataContainer data = im.getPersistentDataContainer();

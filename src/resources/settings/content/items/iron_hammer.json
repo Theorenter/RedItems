@@ -25,8 +25,8 @@
     "shaped-recipe" : {
       "recipe-key" : "_shaped",
       "ingredients" : {
-        "1" : "STICK",
-        "2" : "IRON_INGOT"
+        "1" : {"material" : "STICK", "custom-item-id" : null},
+        "2" : {"material" : "IRON_INGOT", "custom-item-id" : null}
       },
       "shape": [
         "22 ",

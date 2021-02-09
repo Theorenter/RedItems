@@ -11,5 +11,5 @@
 
 # Other #
 */target/**
-*/out/**
+/out/**
 */.idea/**
