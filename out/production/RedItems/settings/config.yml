@@ -3,3 +3,7 @@ plugin:
 
 recipes:
   removed:
+    - "STONE_PICKAXE",
+    - "STONE_SWORD",
+    - "STONE_AXE",
+    - "STONE_HOE"

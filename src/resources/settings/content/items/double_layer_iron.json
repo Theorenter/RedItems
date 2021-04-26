@@ -1,0 +1,22 @@
+{
+  "reditems-id" : "double_layer_iron",
+  "material" : "PAPER",
+  "meta" : {
+    "display-name": "<#ffffff>Двухслойный железный слиток",
+    "custom-model-data" : 101
+  },
+  "recipes" : [{
+    "shaped-recipe" : {
+      "recipe-key" : "_shaped",
+      "ingredients" : {
+        "1" : {"material" : "IRON_INGOT", "custom-item-id" : null}
+      },
+      "shape": [
+        "1 1",
+        "1 1",
+        "1 1"
+      ],
+      "amount": 1
+    }
+  }]
+}

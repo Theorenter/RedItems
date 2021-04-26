@@ -99,8 +99,11 @@ public class RedShapedRecipe {
                     shapedRecipe.setIngredient(k.charAt(0), new RecipeChoice.ExactChoice(ItemManager.getCustomItemList().get(customItemID).getItemStack()));
                 }
             } catch (NullPointerException e) {
-                ItemStack customItem = new ItemStack(Material.getMaterial(v.get("material").toString()));
-                shapedRecipe.setIngredient(k.charAt(0), new RecipeChoice.ExactChoice(customItem));
+                //ItemStack customItem = new ItemStack(Material.getMaterial(v.get("material").toString()));
+                //shapedRecipe.setIngredient(k.charAt(0), new RecipeChoice.ExactChoice(customItem));
+
+                Material mat = Material.getMaterial(v.get("material").toString());
+                shapedRecipe.setIngredient(k.charAt(0), mat);
             }
         });
 

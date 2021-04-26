@@ -6,7 +6,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.concordiacraft.reditems.config.ConfigDefault;
 import org.concordiacraft.reditems.items.ItemManager;
 import org.concordiacraft.reditems.listeners.CustomItemDurability;
-import org.concordiacraft.reditems.listeners.CustomRecipesDiscovering;
 import org.concordiacraft.redutils.main.utils.RedLog;
 import org.concordiacraft.redutils.main.RedPlugin;
 
@@ -41,7 +40,7 @@ public class RedItems extends JavaPlugin implements RedPlugin {
 
         // Listeners
         Bukkit.getPluginManager().registerEvents(new CustomItemDurability(this), this);
-        Bukkit.getPluginManager().registerEvents(new CustomRecipesDiscovering(this), this);
+        //Bukkit.getPluginManager().registerEvents(new CustomRecipesDiscovering(this), this);
     }
 
     @Override

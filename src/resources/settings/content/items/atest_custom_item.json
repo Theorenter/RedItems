@@ -1,21 +1,15 @@
 {
   "reditems-id" : "atest_custom_item",
-  "material" : "IRON_INGOT",
+  "material" : "PAPER",
   "meta" : {
-    "display-name": "<#ffffff>Тестовая железяка",
-    "persistent-data" : [
-      {
-        "data-key": "UNQ-BLOCK-MINECRAFT-RECIPE",
-        "data-type": "BYTE",
-        "data-value": 1
-      }]
+    "display-name": "<#ffffff>Тестовая железяка"
   },
   "recipes" : [{
     "shaped-recipe" : {
       "recipe-key" : "_shaped",
       "ingredients" : {
         "1" : {"material" : "IRON_INGOT", "custom-item-id" : null},
-        "2" : {"material" : "IRON_INGOT", "custom-item-id" : "double_layer_iron"}
+        "2" : {"material" : "PAPER", "custom-item-id" : "double_layer_iron"}
       },
       "shape": [
         "111",
