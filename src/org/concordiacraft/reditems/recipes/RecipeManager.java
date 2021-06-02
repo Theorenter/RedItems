@@ -2,7 +2,6 @@ package org.concordiacraft.reditems.recipes;
 
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
-import org.concordiacraft.reditems.config.ConfigDefault;
 import org.concordiacraft.reditems.main.RedItems;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class RecipeManager {
      * Remove default recipes from config by NameSpacedKey.
      */
     public static void removeDefaultRecipes() {
-        List<String> materialsForDelete = RedItems.getPlugin().getDefaultConfig().getCustomConfig().getStringList("recipes.removed");
+        List<String> materialsForDelete = RedItems.getPlugin().getDefaultConfig().getRemovedRecipes();
         for (String item : materialsForDelete) {
             Bukkit.removeRecipe(NamespacedKey.minecraft(item));
         }

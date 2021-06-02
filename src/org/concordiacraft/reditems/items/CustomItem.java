@@ -13,7 +13,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.concordiacraft.reditems.main.RedItems;
 import org.concordiacraft.reditems.recipes.RedShapedRecipe;
 import org.concordiacraft.reditems.recipes.RedFurnaceRecipe;
-import org.concordiacraft.redutils.main.utils.RedFormatter;
+import org.concordiacraft.redutils.utils.RedFormatter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -34,13 +34,14 @@ public class CustomItem {
     private String ID;
     private ItemStack itemStack;
     private ItemMeta customItemMeta;
-    private HashMap<String, ItemStack[]> customMatrixRecipes = new HashMap<>();
     /**
      * Constructor of a new custom item.
      * @param plugin a plugin to which custom items will be assigned.
      * @param file JSON file from which the custom item is formed.
      */
-    public CustomItem(RedItems plugin, File file) { itemCreation(plugin, file); }
+    public CustomItem(RedItems plugin, File file) {
+        itemCreation(plugin, file);
+    }
     public CustomItem(RedItems plugin, String ID) {
         File customItemFile = new File(plugin.getDataFolder() + File.separator + "settings" +
                 File.separator + "content" + File.separator + "items" + File.separator + ID + ".json");
@@ -131,7 +132,7 @@ public class CustomItem {
             ItemManager.getCustomItemList().put(this.ID, this);
             ItemManager.getCustomItemStackList().add(this.itemStack);
 
-            plugin.getRedLogger().debug("Custom item \"" + this.ID + "\" was successfully loaded with all the relevant recipes!");
+            ItemManager.customItemLoadingDebugLog(this);
         } catch (IOException | ParseException e) {
             plugin.getRedLogger().error("Cannot create a custom item from the " + file.getName() + " file", e);
         }
@@ -365,16 +366,4 @@ public class CustomItem {
      * @return custom ItemStack.
      */
     public ItemStack getItemStack() { return this.itemStack; }
-
-    /**
-     * Adds a custom shaped recipe using ItemStacks to a craft this custom item.
-     * @param key the named key of the recipe.
-     * @param recipeMatrix ItemStack array for creating an item.
-     */
-    public void addShapedMatrixRecipe(String key, ItemStack[] recipeMatrix) { this.customMatrixRecipes.put(key, recipeMatrix); }
-
-    public HashMap<String, ItemStack[]> getCustomMatrixRecipe() {
-        return this.customMatrixRecipes;
-    }
-
 }

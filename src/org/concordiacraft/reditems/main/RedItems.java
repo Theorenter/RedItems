@@ -6,8 +6,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.concordiacraft.reditems.config.ConfigDefault;
 import org.concordiacraft.reditems.items.ItemManager;
 import org.concordiacraft.reditems.listeners.CustomItemDurability;
-import org.concordiacraft.redutils.main.utils.RedLog;
 import org.concordiacraft.redutils.main.RedPlugin;
+import org.concordiacraft.redutils.utils.RedLog;
 
 /**
  * @author Theorenter
@@ -16,8 +16,7 @@ import org.concordiacraft.redutils.main.RedPlugin;
 public class RedItems extends JavaPlugin implements RedPlugin {
 
     // Fields
-    private static Boolean isDebug;
-    private static RedLog rLog;
+    private static RedLog redLog;
     private ConfigDefault config;
 
     @Override
@@ -26,17 +25,15 @@ public class RedItems extends JavaPlugin implements RedPlugin {
 
         // Config loading
         this.config = new ConfigDefault(this, "settings/config.yml");
-        isDebug = (Boolean) ConfigDefault.getCustomConfig().get("plugin.debug");
 
         // Creating a new log object
-        rLog = new RedLog(this);
+        redLog = new RedLog(this);
 
-        rLog.showPluginTitle();
+        redLog.showPluginTitle();
 
 
         // Load files
-        ItemManager.itemLoadFromResources(this);
-        ItemManager.itemLoad(this);
+        ItemManager.init(this);
 
         // Listeners
         Bukkit.getPluginManager().registerEvents(new CustomItemDurability(this), this);
@@ -49,13 +46,11 @@ public class RedItems extends JavaPlugin implements RedPlugin {
     }
 
     @Override
-    public boolean isDebug() {
-        return isDebug;
-    }
+    public boolean isDebug() { return config.isDebug(); }
 
     @Override
     public RedLog getRedLogger() {
-        return rLog;
+        return redLog;
     }
 
     public static RedItems getPlugin() {
