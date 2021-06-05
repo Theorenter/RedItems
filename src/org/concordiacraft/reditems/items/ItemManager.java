@@ -4,6 +4,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 import org.concordiacraft.reditems.main.RedItems;
 
 import java.io.File;
@@ -12,7 +13,6 @@ import java.net.URL;
 import java.security.CodeSource;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -68,7 +68,13 @@ public class ItemManager {
 
     public static HashMap<String, CustomItem> getCustomItemList() { return customItemList; }
 
-    public static boolean isCustomItem(ItemStack itemStack) { return customItemStackList.contains(itemStack); }
+    public static boolean isCustomItem(ItemStack itemStack) {
+        if (itemStack.hasItemMeta()) {
+            PersistentDataContainer pdc = itemStack.getItemMeta().getPersistentDataContainer();
+            return pdc.has(new NamespacedKey(plugin, "reditems-id"), PersistentDataType.STRING);
+        }
+        return false;
+    }
 
     public static CustomItem getCustomItem(String ID) { return customItemList.get(ID); }
 
