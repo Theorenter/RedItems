@@ -9,6 +9,8 @@ import org.concordiacraft.reditems.listeners.CustomItemDurability;
 import org.concordiacraft.redutils.main.RedPlugin;
 import org.concordiacraft.redutils.utils.RedLog;
 
+import java.io.File;
+
 /**
  * @author Theorenter
  * Main class.
@@ -16,6 +18,7 @@ import org.concordiacraft.redutils.utils.RedLog;
 public class RedItems extends JavaPlugin implements RedPlugin {
 
     // Fields
+    private static boolean debug = false;
     private static RedLog redLog;
     private ConfigDefault config;
 
@@ -23,11 +26,11 @@ public class RedItems extends JavaPlugin implements RedPlugin {
     public void onEnable() {
         checkRedUtils();
 
-        // Config loading
-        this.config = new ConfigDefault(this, "settings/config.yml");
-
         // Creating a new log object
         redLog = new RedLog(this);
+
+        // Config loading
+        this.config = new ConfigDefault(this, "settings" + File.separator + "config.yml");
 
         redLog.showPluginTitle();
 
@@ -46,12 +49,15 @@ public class RedItems extends JavaPlugin implements RedPlugin {
     }
 
     @Override
-    public boolean isDebug() { return config.isDebug(); }
+    public boolean isDebug() { return debug; }
 
     @Override
     public RedLog getRedLogger() {
         return redLog;
     }
+
+    @Override
+    public void setDebug(boolean debugStatus) { debug = debugStatus; }
 
     public static RedItems getPlugin() {
         return RedItems.getPlugin(RedItems.class);

@@ -14,7 +14,9 @@ public final class ConfigDefault extends ExtendedRedConfig {
     public ConfigDefault(RedItems plugin, String YMLFileName) {
         super(plugin, YMLFileName);
 
-        this.debug = customConfig.getBoolean("plugin.debug");
+        this.debug = customConfig.getBoolean("main.debug");
+        RedItems.getPlugin().setDebug(debug);
+
         this.removedRecipes = new ArrayList<>(customConfig.getStringList("recipes.removed"));
 
 
